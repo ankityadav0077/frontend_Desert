@@ -4,7 +4,7 @@ import viteLogo from '/vite.svg'
 // import '/src/app.css'
 // import from "/src/assets/images/image-waffle-thumbnail.jpg"
 import Card from './componets/card'
-
+import Cart from './componets/cart'
 function App() {
   const [count, setCount] = useState(0)
   const menu=[
@@ -17,7 +17,8 @@ function App() {
        },
        "name": "Waffle with Berries",
        "category": "Waffle",
-       "price": 6.50
+       "price": 6.50,
+       "quantity":0,
     },
     {
         "image": {
@@ -28,7 +29,8 @@ function App() {
         },
         "name": "Vanilla Bean Crème Brûlée",
         "category": "Crème Brûlée",
-        "price": 7.00
+        "price": 7.00,
+        "quantity":0,
      },
      {
         "image": {
@@ -39,7 +41,8 @@ function App() {
         },
         "name": "Macaron Mix of Five",
         "category": "Macaron",
-        "price": 8.00
+        "price": 8.00,
+        "quantity":0,
      },
      {
         "image": {
@@ -50,7 +53,8 @@ function App() {
         },
         "name": "Classic Tiramisu",
         "category": "Tiramisu",
-        "price": 5.50
+        "price": 5.50,
+        "quantity":0,
      },
      {
         "image": {
@@ -61,7 +65,8 @@ function App() {
         },
         "name": "Pistachio Baklava",
         "category": "Baklava",
-        "price": 4.00
+        "price": 4.00,
+        "quantity":0,
      },
      {
         "image": {
@@ -72,7 +77,8 @@ function App() {
         },
         "name": "Lemon Meringue Pie",
         "category": "Pie",
-        "price": 5.00
+        "price": 5.00,
+        "quantity":0,
      },
      {
         "image": {
@@ -83,7 +89,8 @@ function App() {
         },
         "name": "Red Velvet Cake",
         "category": "Cake",
-        "price": 4.50
+        "price": 4.50,
+        "quantity":0,
      },
      {
         "image": {
@@ -94,7 +101,8 @@ function App() {
         },
         "name": "Salted Caramel Brownie",
         "category": "Brownie",
-        "price": 4.50
+        "price": 4.50,
+        "quantity":0,
      },
      {
         "image": {
@@ -105,7 +113,8 @@ function App() {
         },
         "name": "Vanilla Panna Cotta",
         "category": "Panna Cotta",
-        "price": 6.50
+        "price": 6.50,
+        "quantity":0,
      }
 ]
 //  console.log(menu[0].name)
@@ -134,15 +143,20 @@ function App() {
     }, []);
   return (
     <>
-     <div className=" bg-pink-100 w-full min-h-screen">
+     <div className=" bg-pink-200 w-full min-h-screen">
         <h1 className='font-black text-4xl text-left p-2 '>Desserts</h1>
         {/* <img src="/src/assets/images/image-waffle-thumbnail.jpg" alt="asdfg" /> */}
         <img src="" alt="" />
+        <div className=" md:flex">
+
+        <div className="md:flex flex-wrap justify-center gap-4 md:w-3/4 ">
         {
           menu.map((x)=>
-          <Card key={x.name} title={x.name} price={x.price} description={x.category} imageUrl={x.image[screenType]} item={x} /> )
+            <Card key={x.name} title={x.name} price={x.price} description={x.category} imageUrl={x.image[screenType]} item={x} /> )
         }
-
+        </div>
+         <Cart></Cart>
+        </div>
      </div>
     </>
   )
