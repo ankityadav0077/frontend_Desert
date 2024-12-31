@@ -10,18 +10,17 @@ const Card = ({ title="", description="", price="", imageUrl="/src/assets/images
     // console.log(item);
     
     const dispatch=useDispatch()
-    const x=useSelector((state)=>state.cartItems)
-    const [itemqunt,setItemQuent]=useState(item.quantity)
+    let x=useSelector((state)=>state.cartItems)
+    x=x.filter((x)=>(x.name===item.name))
+    // console.log(x[0]?.quantity)
+    const [itemqunt,setItemQuent]=useState(0)
+    useEffect(()=>setItemQuent(x[0]?.quantity),[x[0]?.quantity])
     useEffect(()=>{
             dispatch(addItems({...item,"quantity":itemqunt,}))
             // console.log(`hello ${itemqunt}`,item);
     },[itemqunt])
-    useEffect(()=>{
-        console.log(item.quantity);
-        
-        setItemQuent(item.quantity)},[item.quantity])
     return (
-        <div className="  md:w-1/3 lg:w-1/4">
+        <div className="  md:w-2/5 lg:w-1/4">
             <img src={imageUrl} alt={title} className="card-image rounded-2xl w-full z-10 border-4 hover:border-orange-500" />
             <div className={` border-4 relative  p-2  flex justify-around mx-auto z-20 -mt-7  rounded-3xl  w-36 ${itemqunt===0?"bg-white hover:border-orange-500 hover:text-orange-500":"bg-orange-500 text-white  border-orange-500 hover:text-white"} `} >{itemqunt===0?<>
                 <MdAddShoppingCart className='text-2xl text-orange-500' /><button onClick={()=>setItemQuent(1)}>Add To Cart</button></>:<><button onClick={()=>setItemQuent(itemqunt-1)}><LuCircleMinus className='text-2xl hover:bg-white rounded-2xl hover:text-orange-500'/>
@@ -31,7 +30,7 @@ const Card = ({ title="", description="", price="", imageUrl="/src/assets/images
             <div className="card-content m-2">
                 <p className="card-description text-gray-500 text-xl font-semibold">{description}</p>
                 <h2 className="card-title text text-2xl font-semibold">{title}</h2>
-                <p className="card-price text-orange-600 text-2xl font-semibold">${price}</p>
+                <p className="card-price text-orange-600 text-2xl font-semibold ">${price}</p>
             </div>
         </div>
     );

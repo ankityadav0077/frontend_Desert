@@ -5,6 +5,8 @@ import viteLogo from '/vite.svg'
 // import from "/src/assets/images/image-waffle-thumbnail.jpg"
 import Card from './componets/card'
 import Cart from './componets/cart'
+import PlaceOrder from './componets/placeorder'
+PlaceOrder
 function App() {
   const [count, setCount] = useState(0)
   const menu=[
@@ -141,23 +143,33 @@ function App() {
         window.removeEventListener('resize', updateWidth);
       };
     }, []);
+    let [orderPlacded,setOrderplacded]=useState(false)
+    const placeorder=()=>{
+        setOrderplacded(true)
+        console.log("confirmd button clicked",orderPladed);
+        
+    }
+    const startNeworder=()=>{
+      setOrderplacded(false)
+    }
   return (
     <>
-     <div className=" bg-pink-200 w-full min-h-screen">
-        <h1 className='font-black text-4xl text-left p-2 '>Desserts</h1>
+     <div className={` bg-pink-200 w-full min-h-screen  ${orderPlacded?"brightness-50 pointer-events-none focus-none z-0":"pointer-events-auto focus-visible z-10"}`}>
+        <h1 className='font-black text-4xl text-left p-2 md:ml-8 '>Desserts</h1>
         {/* <img src="/src/assets/images/image-waffle-thumbnail.jpg" alt="asdfg" /> */}
         <img src="" alt="" />
-        <div className=" md:flex">
+        <div className=" md:flex ">
 
-        <div className="md:flex flex-wrap justify-center gap-4 md:w-3/4 ">
+        <div className="md:flex flex-wrap justify-center gap-4 md:w-3/5 lg:w-4/5 ">
         {
           menu.map((x)=>
             <Card key={x.name} title={x.name} price={x.price} description={x.category} imageUrl={x.image[screenType]} item={x} /> )
         }
         </div>
-         <Cart></Cart>
+         <Cart buttonclick={placeorder}></Cart>
         </div>
      </div>
+      {orderPlacded?<PlaceOrder buttonclick={startNeworder}></PlaceOrder>:""}
     </>
   )
 }
